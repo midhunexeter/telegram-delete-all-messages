@@ -6,11 +6,11 @@ from pyrogram.raw.functions.messages import Search
 from pyrogram.raw.types import InputPeerSelf, InputMessagesFilterEmpty
 from pyrogram.raw.types.messages import ChannelMessages
 from pyrogram.errors import FloodWait, UnknownError
+from dotenv import load_dotenv
+load_dotenv()
 
-
-API_ID = getenv('API_ID', None) or int(input('Enter your Telegram API id: '))
-API_HASH = getenv('API_HASH', None) or input('Enter your Telegram API hash: ')
-
+API_ID = getenv("API_ID")
+API_HASH = getenv("API_HASH")
 app = Client("client", api_id=API_ID, api_hash=API_HASH)
 app.start()
 
@@ -59,7 +59,7 @@ class Cleaner:
             '(!) DELETE ALL YOUR MESSAGES IN ALL OF THOSE GROUPS (!)\n'
         )
 
-        nums_str = input('Insert option numbers (comma separated): ')
+        nums_str = '1,2,3,4,5,6,7,8,9'# input('Insert option numbers (comma separated): ')
         nums = map(lambda s: int(s.strip()), nums_str.split(','))
 
         for n in nums:
@@ -69,7 +69,7 @@ class Cleaner:
 
             if n == len(groups) + 1:
                 print('\nTHIS WILL DELETE ALL YOUR MESSSAGES IN ALL GROUPS!')
-                answer = input('Please type "I understand" to proceed: ')
+                answer = "I Understand"#input('Please type "I understand" to proceed: ')
                 if answer.upper() != 'I UNDERSTAND':
                     print('Better safe than sorry. Aborting...')
                     exit(-1)
@@ -129,6 +129,8 @@ class Cleaner:
 
 
 if __name__ == '__main__':
+    
+
     try:
         deleter = Cleaner()
         deleter.select_groups()
